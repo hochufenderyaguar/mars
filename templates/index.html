@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 align="center">Журнал работ</h1>
+{% for item in jobs%}
+<h1>{{ item.id }}</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-md6">название работы</div>
+    <div class="col-md6">фамилия и имя ответственного</div>
+      <div class="col-md6">продолжительность в часах</div>
+      <div class="col-md6">список id команды</div>
+      <div class="col-md6">завершена или нет</div>
+    <div class="w-100"></div>
+    <div class="col-md6">{{ item.job }}</div>
+    <div class="col-md6">{{ item.team_leader }}</div>
+    <div class="col-md6">{{ item.work_size }}</div>
+    <div class="col-md6">{{ item.collaborators }}</div>
+    <div class="col-md6">{{ item.is_finished }}</div>
+  </div>
+</div>
+{% endfor %}
+{% endblock %}

@@ -3,6 +3,7 @@ from forms.user import LoginForm, RegisterForm
 from data import db_session
 from flask_login import LoginManager, login_user
 from data.users import User
+from data.jobs import Jobs
 from datetime import datetime
 
 app = Flask(__name__)
@@ -16,6 +17,13 @@ login_manager.init_app(app)
 def load_user(user_id):
     db_sess = db_session.create_session()
     return db_sess.query(User).get(user_id)
+
+
+@app.route('/')
+def index():
+    db_sess = db_session.create_session()
+    jobs = db_sess.query(Jobs).all()
+    return render_template("index.html", jobs=jobs)
 
 
 @app.route('/login', methods=['GET', 'POST'])
