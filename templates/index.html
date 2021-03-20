@@ -6,7 +6,7 @@
 {% endif %}
 <h1 align="center">Журнал работ</h1>
 {% for item in jobs%}
-{% if current_user.is_authenticated and item.team_leader in (current_user.id, 1) %}
+{% if current_user.is_authenticated and current_user.id in (1, item.team_leader) %}
     <div>
         <a href="/add_job/{{ item.id }}" class="btn btn-warning">
             Изменить
