@@ -2,10 +2,20 @@
 
 {% block content %}
 {% if current_user.is_authenticated %}
-    <a href="addjob" class="btn btn-secondary">Добавить работу</a>
+    <a href="add_job" class="btn btn-secondary">Добавить работу</a>
 {% endif %}
 <h1 align="center">Журнал работ</h1>
 {% for item in jobs%}
+{% if current_user.is_authenticated and item.team_leader in (current_user.id, 1) %}
+    <div>
+        <a href="/add_job/{{ item.id }}" class="btn btn-warning">
+            Изменить
+        </a>
+        <a href="/job_delete/{{ item.id }}" class="btn btn-danger">
+            Удалить
+        </a>
+    </div>
+{% endif %}
 <h1>{{ item.id }}</h1>
 <div class="container">
   <div class="row">
