@@ -161,8 +161,7 @@ def users_show(user_id):
         "format": "json"}
     geocoder_api_server = "http://geocode-maps.yandex.ru/1.x/"
     response = requests.get(geocoder_api_server, params=geocoder_params)
-    map_file = "map.png"
-    with open(map_file, "wb") as file:
+    with open('img/map_file', "wb") as file:
         file.write(response.content)
     return render_template('city.html', city=user["city"], name=user["name"], surname=user["surname"])
 
