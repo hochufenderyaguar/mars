@@ -1,8 +1,9 @@
-from flask import Flask, redirect, render_template, request, jsonify, Blueprint, make_response
+import requests
+from flask import Flask, redirect, render_template, request, jsonify, make_response
 from werkzeug.exceptions import abort
 from forms.user import LoginForm, RegisterForm
-from data import db_session, jobs_api
-from flask_login import LoginManager, login_user, login_required, current_user, logout_user
+from data import db_session, jobs_api, users_api
+from flask_login import LoginManager, login_user, login_required, logout_user
 from data.users import User
 from data.jobs import Jobs
 from datetime import datetime
@@ -151,9 +152,25 @@ def reqister():
     return render_template('register.html', title='Регистрация', form=form)
 
 
+@app.route('/users_show/<int:user_id>')
+def users_show(user_id):
+    user = users_api.get_one_user(user_id)["user"]
+    geocoder_params = {
+        "apikey": "40d1649f-0493-4b70-98ba-98533de7710b",
+        "geocode": user["city"],
+        "format": "json"}
+    geocoder_api_server = "http://geocode-maps.yandex.ru/1.x/"
+    response = requests.get(geocoder_api_server, params=geocoder_params)
+    map_file = "map.png"
+    with open(map_file, "wb") as file:
+        file.write(response.content)
+    return render_template('city.html', city=user["city"], name=user["name"], surname=user["surname"])
+
+
 def main():
     db_session.global_init("db/mars_explorer.db")
-    app.register_blueprint(jobs_api.blueprint)
+    # app.register_blueprint(jobs_api.blueprint)
+    app.register_blueprint(users_api.blueprint)
     app.run()
 
 
