@@ -3,6 +3,7 @@
 {% block content %}
 {% if current_user.is_authenticated %}
     <a href="add_job" class="btn btn-secondary">Добавить работу</a>
+    <a href="departments" class="btn btn-secondary">Департаменты</a>
 {% endif %}
 <h1 align="center">Журнал работ</h1>
 {% for item in jobs%}
@@ -16,7 +17,7 @@
         </a>
     </div>
 {% endif %}
-<h1>{{ item.id }}</h1>
+<h1>Работа {{ item.id }}</h1>
 <div class="container">
     <div class="row">
         <div class="col">название работы</div>
