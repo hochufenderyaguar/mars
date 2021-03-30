@@ -1,29 +1,12 @@
-from requests import put, get
+from requests import get, post, delete
 
-print(put('http://localhost:5000/api/jobs',
-          json={'id': 3,
-                'team_leader': 1,
-                'job': 'job',
-                'work_size': 1,
-                'collaborators': '1',
-                'is_finished': True
-                }).json())
-
-print(put('http://localhost:5000/api/jobs',
-          json={'team_leader': 1,
-                'job': 'job',
-                'work_size': 1,
-                'collaborators': '1',
-                'is_finished': True
-                }).json())
-
-print(put('http://localhost:5000/api/jobs',
-          json={'id': 999,
-                'team_leader': 1,
-                'job': 'job',
-                'work_size': 1,
-                'collaborators': '1',
-                'is_finished': True
-                }).json())
-
-print(get('http://localhost:5000/api/jobs').json())
+print(get('http://localhost:5000/api/v2/users').json())
+print(get('http://localhost:5000/api/v2/users/1').json())
+print(post('http://localhost:5000/api/v2/users', json={'surname': 'a',
+                                                       'name': 'a',
+                                                       'age': 1,
+                                                       'position': 'a',
+                                                       'speciality': 'a',
+                                                       'address': 'a',
+                                                       'email': 'a',
+                                                       'hashed_password': 'a'}).json())
