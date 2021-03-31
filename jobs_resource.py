@@ -18,7 +18,7 @@ class JobsResource(Resource):
         abort_if_job_not_found(job_id)
         session = db_session.create_session()
         job = session.query(Jobs).get(job_id)
-        return jsonify({'user': job.to_dict()})
+        return jsonify({'job': job.to_dict()})
 
     def delete(self, job_id):
         abort_if_job_not_found(job_id)
@@ -33,7 +33,7 @@ class JobsListResource(Resource):
     def get(self):
         session = db_session.create_session()
         jobs = session.query(Jobs).all()
-        return jsonify({'user': [item.to_dict() for item in jobs]})
+        return jsonify({'job': [item.to_dict() for item in jobs]})
 
     def post(self):
         args = parser.parse_args()
