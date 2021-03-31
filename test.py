@@ -10,3 +10,7 @@ print(post('http://localhost:5000/api/v2/users', json={'surname': 'a',
                                                        'address': 'a',
                                                        'email': 'a',
                                                        'hashed_password': 'a'}).json())
+print(delete('http://localhost:5000/api/v2/users/1').json())
+
+print(get('http://localhost:5000/api/v2/users/999').json())
+print(delete('http://localhost:5000/api/v2/users/999').json())

@@ -1,12 +1,9 @@
-from flask import Flask, jsonify
-from flask_restful import abort, Api, Resource
+from flask import jsonify
+from flask_restful import abort,  Resource
 from parser1 import parser
 
 from data import db_session
 from data.users import User
-
-app = Flask(__name__)
-api = Api(app)
 
 
 def abort_if_user_not_found(user_id):
