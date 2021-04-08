@@ -11,6 +11,7 @@ from datetime import datetime
 from forms.job import JobForm
 from forms.department import DepartmentForm
 import users_resource
+import jobs_resource
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
@@ -214,8 +215,8 @@ def reqister():
 def main():
     api.add_resource(users_resource.UsersListResource, '/api/v2/users')
     api.add_resource(users_resource.UsersResource, '/api/v2/users/<int:user_id>')
-    api.add_resource(users_resource.UsersListResource, '/api/v2/jobs')
-    api.add_resource(users_resource.UsersResource, '/api/v2/jobs/<int:job_id>')
+    api.add_resource(jobs_resource.JobsListResource, '/api/v2/jobs')
+    api.add_resource(jobs_resource.JobsResource, '/api/v2/jobs/<int:job_id>')
     db_session.global_init("db/mars_explorer.db")
     app.register_blueprint(jobs_api.blueprint)
     app.run()
