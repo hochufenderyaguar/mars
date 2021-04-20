@@ -1,1 +1,1 @@
-from . import users, jobs, departments
+from . import users, jobs, departments, job_category
